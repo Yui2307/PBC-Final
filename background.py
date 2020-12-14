@@ -109,15 +109,15 @@ class VoiceControlGame(cocos.layer.ColorLayer):
     def __init__(self):
         super(VoiceControlGame, self).__init__(255,255,255,255,800,600)
         self.num_samples = 1000
-        
+        self.Game_BG = Game_BG()
+        self.add(self.Game_BG)       
         
         self.vbar = Sprite(black)
         self.vbar.position = 20, 450
         self.vbar.scale_y = 0.1
         self.vbar.image_anchor = 0,0
         self.add(self.vbar)
-        self.Game_BG = Game_BG()
-        self.add(self.Game_BG)
+
         self.pikachu = Pikachu()
         self.add(self.pikachu)
 

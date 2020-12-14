@@ -116,11 +116,11 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         self.vbar.scale_y = 0.1
         self.vbar.image_anchor = 0,0
         self.add(self.vbar)
-        
-        self.pikachu = Pikachu()
-        self.add(self.pikachu)
         self.Game_BG = Game_BG()
         self.add(self.Game_BG)
+        self.pikachu = Pikachu()
+        self.add(self.pikachu)
+
         
         
         self.floor = cocos.cocosnode.CocosNode()

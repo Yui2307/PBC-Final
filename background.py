@@ -20,7 +20,7 @@ from cocos.scenes.transitions import *
 import pyglet
 black = pyglet.image.load("block.png")
 pic = pyglet.image.load("rabbit.png")
-bg = pyglet.image.load("forest.jpg")
+bg = pyglet.image.load("forest.png")
 
 
 # In[3]:
@@ -147,17 +147,17 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         audio_data = self.stream.read(self.num_samples, exception_on_overflow = False)
         k = max(struct.unpack("1000h",audio_data))
         self.vbar.scale_x = k/10000
-        if k > 3000:
+        if k > 1000:
             self.floor.x -= min((k/20),150)*dt
-        if k > 8000:
-            self.pikachu.jump((k-7000)/1000)
+        if k > 2000:
+            self.pikachu.jump((k-1000)/1000)
         self.collide()
     
     def reset(self):
         self.floor.x = 0  
 
 
-# In[ ]:
+# In[]:
 
 
 if __name__ == "__main__":

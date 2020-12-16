@@ -161,7 +161,7 @@ class VoiceControlGame(cocos.layer.ColorLayer):
 
 
 if __name__ == "__main__":
-    cocos.director.director.init(caption="go go")
+    cocos.director.director.init(caption="rabbit jump")
     cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
 
 

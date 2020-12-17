@@ -28,7 +28,10 @@ bg = pyglet.image.load("forest.png")
 
 class Pikachu(cocos.sprite.Sprite):
     def __init__(self):
-        super(Pikachu, self).__init__(pic)
+        img = pyglet.image.load('res/R5.png')
+        img_grid = pyglet.image.ImageGrid(img, 1, 8, item_width=100, item_height=100)
+        Rabbit = pyglet.image.Animation.from_image_sequence(img_grid[0:],0.1, loop = True)
+        super(Pikachu, self).__init__(Rabbit)
         self.image_anchor = 0 , 0
         self.reset(False)
         self.schedule(self.update)
@@ -147,8 +150,7 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         audio_data = self.stream.read(self.num_samples, exception_on_overflow = False)
         k = max(struct.unpack("1000h",audio_data))
         self.vbar.scale_x = k/10000
-        if k > 1000:
-            self.floor.x -= min((k/20),150)*dt
+        self.floor.x -= 200*dt
         if k > 2000:
             self.pikachu.jump((k-1000)/1000)
         self.collide()

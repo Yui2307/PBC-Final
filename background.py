@@ -157,7 +157,9 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         self.collide()
     
     def reset(self):
-        self.floor.x = 0  
+        cocos.director.director.run(test_scene2)
+        self.floor.x = 0 
+        
 class MainMenu(cocos.menu.Menu):
     def __init__(self):
         super().__init__("My Game")

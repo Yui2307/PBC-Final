@@ -158,7 +158,18 @@ class VoiceControlGame(cocos.layer.ColorLayer):
     
     def reset(self):
         self.floor.x = 0  
-
+class MainMenu(cocos.menu.Menu):
+    def __init__(self):
+        super().__init__("My Game")
+        items = []
+        items.append(cocos.menu.MenuItem("New Game", self.on_new_game))
+        items.append(cocos.menu.MenuItem("Quit", self.on_quit))
+        self.create_menu(items, cocos.menu.shake(), cocos.menu.shake_back())
+    def on_new_game(self):
+        cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
+    def on_quit(self):
+        cocos.director.director.window.close()
+        
 class GameOverMenu(cocos.menu.Menu):
     def __init__(self):
         super().__init__("GameOver")

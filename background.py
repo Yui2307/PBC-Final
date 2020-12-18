@@ -29,7 +29,7 @@ bg = pyglet.image.load("forest.png")
 class Pikachu(cocos.sprite.Sprite):
     def __init__(self):
         img = pyglet.image.load('res/R5.png')
-        img_grid = pyglet.image.ImageGrid(img, 1, 8, item_width=100, item_height=100)
+        img_grid = pyglet.image.ImageGrid(img, 1, 8, item_width=100, item_height=107)
         Rabbit = pyglet.image.Animation.from_image_sequence(img_grid[0:],0.1, loop = True)
         super(Pikachu, self).__init__(Rabbit)
         self.image_anchor = 0 , 0

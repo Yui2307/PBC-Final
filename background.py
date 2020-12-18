@@ -3,7 +3,7 @@
 
 # In[1]:
 
-
+import pygame
 import cocos
 import struct
 import pyaudio
@@ -12,7 +12,9 @@ from pyaudio import paInt16
 import random
 from cocos.scenes.transitions import *
 
-
+pygame.mixer.init()
+pygame.mixer.music.load('totoro.mp3')
+pygame.mixer.music.play(-1)
 
 # In[2]:
 
@@ -157,13 +159,31 @@ class VoiceControlGame(cocos.layer.ColorLayer):
     def reset(self):
         self.floor.x = 0  
 
-
+class GameOverMenu(cocos.menu.Menu):
+    def __init__(self):
+        super().__init__("GameOver")
+        items2 = []
+        items2.append(cocos.menu.MenuItem("Try agin", self.try_agin))
+        items2.append(cocos.menu.MenuItem("Quit", self.aquit))
+        self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
+    def try_agin(self):
+        cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
+    def aquit(self):
+        cocos.director.director.window.close()
 # In[]:
 
 
 if __name__ == "__main__":
     cocos.director.director.init(caption="rabbit jump")
-    cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
+    menu = MainMenu()
+    try_agin = GameOverMenu()
+    test_scene = cocos.scene.Scene()
+    test_scene2 = cocos.scene.Scene()
+    test_scene.add(menu)
+    test_scene2.add(try_agin)
+    cocos.director.director.run(test_scene)
+    cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))
+    mixer.init()
 
 
 # In[ ]:

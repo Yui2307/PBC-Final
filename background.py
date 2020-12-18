@@ -19,19 +19,18 @@ from cocos.scenes.transitions import *
 
 import pyglet
 black = pyglet.image.load("block.png")
-pic = pyglet.image.load("rabbit.png")
 bg = pyglet.image.load("forest.png")
 
 
 # In[3]:
 
 
-class Pikachu(cocos.sprite.Sprite):
+class Rabbit(cocos.sprite.Sprite):
     def __init__(self):
         img = pyglet.image.load('res/R5.png')
         img_grid = pyglet.image.ImageGrid(img, 1, 8, item_width=100, item_height=107)
-        Rabbit = pyglet.image.Animation.from_image_sequence(img_grid[0:],0.1, loop = True)
-        super(Pikachu, self).__init__(Rabbit)
+        Rabbitpic = pyglet.image.Animation.from_image_sequence(img_grid[0:],0.1, loop = True)
+        super(Rabbit, self).__init__(Rabbitpic)
         self.image_anchor = 0 , 0
         self.reset(False)
         self.schedule(self.update)
@@ -73,7 +72,7 @@ class Block(cocos.sprite.Sprite):
             self.scale_x = 8
             self.scale_y = 1
         else:
-            self.scale_x = 0.5 + random.random()*1.5
+            self.scale_x = 0.5 + random.random()*2.5
             self.scale_y = min(max(y-50+random.random()*100,100),300)/100
             self.position = x + 200+ random.random()*100,0
 
@@ -121,8 +120,8 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         self.vbar.image_anchor = 0,0
         self.add(self.vbar)
 
-        self.pikachu = Pikachu()
-        self.add(self.pikachu)
+        self.rabbit = Rabbit()
+        self.add(self.rabbit)
 
         
         
@@ -139,11 +138,11 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         self.schedule(self.update)
     
     def collide(self):
-        diffx = self.pikachu.x - self.floor.x
+        diffx = self.rabbit.x - self.floor.x
         for b in self.floor.get_children():
-            if(b.x <= diffx + self.pikachu.width*0.8) and (diffx + self.pikachu.width*0.2 <= b.x + b.width):
-                if self.pikachu.y < b.height:
-                    self.pikachu.land(b.height)
+            if(b.x <= diffx + self.rabbit.width*0.8) and (diffx + self.rabbit.width*0.2 <= b.x + b.width):
+                if self.rabbit.y < b.height:
+                    self.rabbit.land(b.height)
                     break
     
     def update(self, dt):
@@ -152,7 +151,7 @@ class VoiceControlGame(cocos.layer.ColorLayer):
         self.vbar.scale_x = k/10000
         self.floor.x -= 200*dt
         if k > 2000:
-            self.pikachu.jump((k-1000)/1000)
+            self.rabbit.jump((k-1000)/1000)
         self.collide()
     
     def reset(self):

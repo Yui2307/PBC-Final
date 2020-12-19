@@ -225,6 +225,7 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.gameover = Gameover(self)
         #self.gameover = GameOverMenu()
         self.add(self.gameover, 100000)
+        pygame.mixer.music.stop()
     
     def add_score(self):
         self.score += 1
@@ -286,6 +287,7 @@ class GameOverMenu(cocos.menu.Menu):
         cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def aquit(self):
         cocos.director.director.window.close()
+        
 
 
 # In[ ]:

@@ -15,7 +15,6 @@ from cocos.scenes.transitions import *
 import pygame
 import pyaudio
 
-
 # In[2]:
 
 
@@ -154,6 +153,7 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.txt_score = cocos.text.Label(u'score：0',
                                           font_name=font,
                                           font_size=24,
+                                          bold = True,
                                           color=WHITE)
         self.txt_score.position = 450, 440
         self.add(self.txt_score, 99999)
@@ -225,6 +225,8 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.txt_score.element.text = u'score：%d' % self.score
 
 
+
+
 # In[8]:
 
 
@@ -246,6 +248,7 @@ class GameOverMenu(cocos.menu.Menu):
         items2 = []
         items2.append(cocos.menu.MenuItem("Try agin", self.try_agin))
         items2.append(cocos.menu.MenuItem("Quit", self.aquit))
+        
         self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
     def try_agin(self):
         cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  

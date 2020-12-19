@@ -20,8 +20,8 @@ import pyaudio
 
 
 pygame.mixer.init()
-pygame.mixer.music.load('totoro.mp3')
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.load('totoro.mp3')
+#pygame.mixer.music.play(-1)
 
 
 # In[3]:
@@ -182,6 +182,8 @@ class RabbitJump(cocos.layer.ColorLayer):
         
         audio = pyaudio.PyAudio()
         self.stream = audio.open(format = paInt16, channels=1, rate = int(audio.get_device_info_by_index(0)["defaultSampleRate"]),input= True,frames_per_buffer=self.num_samples)
+        pygame.mixer.music.load('totoro.mp3')
+        pygame.mixer.music.play(-1)
         self.schedule(self.update)
     
     def on_mouse_press(self, x, y, buttons, modifiers):
@@ -213,11 +215,15 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.score = 0
         self.txt_score.element.text = u'score：0'
         self.rabbit.reset()
+        if self.gameover:
+            self.remove(self.gameover)
+            self.gameover = None
     
     def end_game(self):
         self.stream.stop_stream()
         self.pause_scheduler()
-        self.gameover = GameOverMenu()
+        self.gameover = Gameover(self)
+        #self.gameover = GameOverMenu()
         self.add(self.gameover, 100000)
     
     def add_score(self):
@@ -226,6 +232,32 @@ class RabbitJump(cocos.layer.ColorLayer):
 
 
 # In[8]:
+
+
+class Gameover(cocos.layer.ColorLayer):
+    def __init__(self, game):
+        super(Gameover, self).__init__(0, 0, 0, 255, 640, 480)
+        self.game = game
+        font = ['SimHei', 'STHeiti', 'SimHei', 'SimSun']
+        self.score = cocos.text.Label(u'Your Score：%d' % self.game.score,
+                                      font_name=font,
+                                      font_size=36)
+        self.score.position = 170, 340
+        self.add(self.score)
+        menu = cocos.menu.Menu(u'Game Over')
+        menu.font_title['font_name'] = font
+        menu.font_item['font_name'] = font
+        menu.font_item_selected['font_name'] = font
+        replay = cocos.menu.MenuItem(u'Click Here', self.replay)
+        replay.y = -100
+        menu.create_menu([replay])
+        self.add(menu)
+        
+    def replay(self):
+        self.game.reset()
+
+
+# In[9]:
 
 
 class MainMenu(cocos.menu.Menu):
@@ -253,7 +285,7 @@ class GameOverMenu(cocos.menu.Menu):
         cocos.director.director.window.close()
 
 
-# In[9]:
+# In[ ]:
 
 
 if __name__ == "__main__":

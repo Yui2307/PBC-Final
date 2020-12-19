@@ -109,9 +109,9 @@ class Game_BG(cocos.layer.Layer):
 # In[8]:
 
 
-class VoiceControlGame(cocos.layer.ColorLayer):
+class RabbitJump(cocos.layer.ColorLayer):
     def __init__(self):
-        super(VoiceControlGame, self).__init__(255,255,255,255,800,600)
+        super(RabbitJump, self).__init__(255,255,255,255,800,600)
         self.num_samples = 1000
         self.Game_BG = Game_BG()
         self.add(self.Game_BG)       
@@ -168,7 +168,7 @@ class MainMenu(cocos.menu.Menu):
         items.append(cocos.menu.MenuItem("Quit", self.on_quit))
         self.create_menu(items, cocos.menu.shake(), cocos.menu.shake_back())
     def on_new_game(self):
-        cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
+        cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def on_quit(self):
         cocos.director.director.window.close()
         
@@ -180,14 +180,14 @@ class GameOverMenu(cocos.menu.Menu):
         items2.append(cocos.menu.MenuItem("Quit", self.aquit))
         self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
     def try_agin(self):
-        cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))  
+        cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def aquit(self):
         cocos.director.director.window.close()
 # In[]:
 
 
 if __name__ == "__main__":
-    cocos.director.director.init(caption="rabbit jump")
+    cocos.director.director.init(caption="Rabbit Jump")
     menu = MainMenu()
     try_agin = GameOverMenu()
     test_scene = cocos.scene.Scene()
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     test_scene.add(menu)
     test_scene2.add(try_agin)
     cocos.director.director.run(test_scene)
-    cocos.director.director.run(cocos.scene.Scene(VoiceControlGame()))
+    cocos.director.director.run(cocos.scene.Scene(RabbitJump()))
     mixer.init()
 
 

@@ -291,6 +291,7 @@ class GameOverMenu(cocos.menu.Menu):
         super().__init__("GameOver")
         items2 = []
         items2.append(cocos.menu.MenuItem("Try agin", self.try_agin))
+        items2.append(cocos.menu.MenuItem("New Game:2048", self.t2048_new_game))
         items2.append(cocos.menu.MenuItem("Quit", self.aquit))
         
         self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
@@ -298,6 +299,13 @@ class GameOverMenu(cocos.menu.Menu):
         cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def aquit(self):
         cocos.director.director.window.close()
+    def t2048_new_game(self):
+        frame = simplegui.create_frame('2048', 420, 460)
+        frame.set_canvas_background("White")
+        frame.set_draw_handler(draw)
+        frame.set_keydown_handler(keydown)
+        init()
+        frame.start() 
         
 LINEWIDTH=10
 BLOCKWIDTH=90

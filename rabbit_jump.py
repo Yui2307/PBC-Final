@@ -112,7 +112,7 @@ class Block(cocos.sprite.Sprite):
     def reset(self):
         x, y = self.game.last_block
         if x == 0:
-            self.scale_x = 8
+            self.scale_x = 10
             self.scale_y = 1
             self.position = 0, 0
             self.active = False

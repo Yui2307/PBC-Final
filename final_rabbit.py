@@ -14,9 +14,8 @@ import struct
 from cocos.scenes.transitions import *
 import pygame
 import pyaudio
-import random
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
-import numpy
+
 
 
 # In[2]:
@@ -481,7 +480,6 @@ def init():
         if (board.get_element(rand_x,rand_y).getval() == 0):
             board.modify(rand_x,rand_y,addnewtile())
             times+=1
-    #print str(board)
 def draw(canvas):
     global board,REFPOS
     board.draw(canvas,(REFPOS[0]+5,REFPOS[1]+50))
@@ -501,7 +499,6 @@ def keydown(key):
             tmp.modify(ival,jval,board.get_element(ival,jval).getval())
     
     if key==simplegui.KEY_MAP['left']:
-        #print "left\n"
         count=0
         for ival in range(4):
             line=[]
@@ -537,7 +534,6 @@ def keydown(key):
 
     elif key==simplegui.KEY_MAP['right']:
         count=0
-        #print "right\n"
         for ival in range(4):
             line=[]
             for jval in range (4):
@@ -572,7 +568,6 @@ def keydown(key):
       
     elif key==simplegui.KEY_MAP['up']:
         count=0
-        #print "up\n"
         for ival in range(4):
             line=[]
             for jval in range (4):
@@ -605,7 +600,6 @@ def keydown(key):
                 judgedir[2]=1
     elif key==simplegui.KEY_MAP['down']:
         count=0
-        #print "down\n"
         for ival in range(4):
             line=[]
             for jval in range (4):

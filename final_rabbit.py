@@ -487,7 +487,7 @@ def draw(canvas):
         canvas.draw_polygon([(REFPOS[0]+num*100,REFPOS[1]),(REFPOS[0]+num*100,REFPOS[1]+4*100)], 10, 'black')
         canvas.draw_polygon([(REFPOS[0],REFPOS[1]+num*100),(REFPOS[0]+4*100,REFPOS[1]+num*100)],10, 'black')
     if judgedir[0] and judgedir[1] and judgedir[2] and judgedir[3]:
-         canvas.draw_text("You loose!", [200,450],50,"Red")
+         canvas.draw_text("You lose!", [200,450],50,"Red")
 def keydown(key):
     global board,judgedir
     tmp=Nmatrix()

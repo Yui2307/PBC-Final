@@ -222,7 +222,7 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.vbar.scale_x = k/10000
         self.floor.x -= 200*dt
         if k > 2000:
-            self.rabbit.jump((k-1000)/1000)
+            self.rabbit.jump((k-1000)/500)
         self.floor.x -= self.rabbit.velocity * dt  #
         self.collide()
     
@@ -261,7 +261,7 @@ class Carrot(cocos.sprite.Sprite):
         self.game = block.game
         self.rabbit = block.game.rabbit
         self.floor = block.floor
-        self.position = block.x + block.width / 2, block.height + 100
+        self.position = block.x + block.width / 2, block.height + 200
 
         self.schedule(self.update)
 

@@ -318,12 +318,12 @@ class GameOverMenu(cocos.menu.Menu):
     def __init__(self):
         super().__init__("GameOver")
         items2 = []
-        items2.append(cocos.menu.MenuItem("Try agin", self.try_agin))
+        items2.append(cocos.menu.MenuItem("Try again", self.try_again))
         items2.append(cocos.menu.MenuItem("New Game:2048", self.t2048_new_game))
         items2.append(cocos.menu.MenuItem("Quit", self.aquit))
         
         self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
-    def try_agin(self):
+    def try_again(self):
         cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def aquit(self):
         cocos.director.director.window.close()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import cocos
@@ -18,15 +18,8 @@ import random
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import numpy
 
+
 # In[2]:
-
-
-pygame.mixer.init()
-#pygame.mixer.music.load('totoro.mp3')
-#pygame.mixer.music.play(-1)
-
-
-# In[3]:
 
 
 import pyglet
@@ -34,7 +27,8 @@ black = pyglet.image.load("block.png")
 bg = pyglet.image.load("forest.png")
 carrot = pyglet.image.load("carrot.png")
 
-# In[4]:
+
+# In[3]:
 
 
 class Rabbit(cocos.sprite.Sprite):
@@ -50,8 +44,8 @@ class Rabbit(cocos.sprite.Sprite):
         self.speed = 0
         self.position = 100, 300
         self.image_anchor = 0 , 0
-        self.rush_time = 0  #
-        self.velocity = 0  #
+        self.rush_time = 0
+        self.velocity = 0
         self.schedule(self.update)
     
     
@@ -78,7 +72,7 @@ class Rabbit(cocos.sprite.Sprite):
         self.y -= self.speed
         if self.y < -85:
             self.die()
-        if self.rush_time > 0:  #
+        if self.rush_time > 0:
             self.rush_time -= dt
             if self.rush_time <= 0:
                 self.velocity = 0
@@ -99,7 +93,7 @@ class Rabbit(cocos.sprite.Sprite):
         self.position = 80, 280
 
 
-# In[5]:
+# In[4]:
 
 
 class Block(cocos.sprite.Sprite):
@@ -123,7 +117,7 @@ class Block(cocos.sprite.Sprite):
     def reset(self):
         x, y = self.game.last_block
         if x == 0:
-            self.scale_x = 10
+            self.scale_x = 15
             self.scale_y = 1
             self.position = 0, 0
             self.active = False
@@ -137,7 +131,7 @@ class Block(cocos.sprite.Sprite):
         self.game.last_block = self.x + self.width, self.height
 
 
-# In[6]:
+# In[5]:
 
 
 class Game_BG(cocos.layer.Layer):
@@ -149,7 +143,7 @@ class Game_BG(cocos.layer.Layer):
         self.add(background)
 
 
-# In[7]:
+# In[6]:
 
 
 class RabbitJump(cocos.layer.ColorLayer):
@@ -199,9 +193,6 @@ class RabbitJump(cocos.layer.ColorLayer):
         pygame.mixer.music.play(-1)
         self.schedule(self.update)
     
-    def on_mouse_press(self, x, y, buttons, modifiers):
-        pass
-    
     def collide(self):
         diffx = self.rabbit.x - self.floor.x
         for b in self.floor.get_children():
@@ -236,13 +227,15 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.stream.stop_stream()
         self.pause_scheduler()
         self.gameover = Gameover(self)
-        #self.gameover = GameOverMenu()
         self.add(self.gameover, 100000)
         pygame.mixer.music.stop()
     
     def add_score(self):
         self.score += 1
         self.txt_score.element.text = u'score：%d' % self.score
+
+
+# In[7]:
 
 
 class Carrot(cocos.sprite.Sprite):
@@ -265,6 +258,7 @@ class Carrot(cocos.sprite.Sprite):
 
     def reset(self):
         self.parent.remove(self)
+
 
 # In[8]:
 
@@ -314,17 +308,21 @@ class MainMenu(cocos.menu.Menu):
         frame.start() 
     def on_quit(self):
         cocos.director.director.window.close()
-        
+
+
+# In[10]:
+
+
 class GameOverMenu(cocos.menu.Menu):
     def __init__(self):
         super().__init__("GameOver")
         items2 = []
-        items2.append(cocos.menu.MenuItem("Try agin", self.try_agin))
+        items2.append(cocos.menu.MenuItem("Try again", self.try_again))
         items2.append(cocos.menu.MenuItem("New Game:2048", self.t2048_new_game))
         items2.append(cocos.menu.MenuItem("Quit", self.aquit))
         
         self.create_menu(items2, cocos.menu.shake(), cocos.menu.shake_back())
-    def try_agin(self):
+    def try_again(self):
         cocos.director.director.run(cocos.scene.Scene(RabbitJump()))  
     def aquit(self):
         cocos.director.director.window.close()
@@ -335,7 +333,11 @@ class GameOverMenu(cocos.menu.Menu):
         frame.set_keydown_handler(keydown)
         init()
         frame.start() 
-        
+
+
+# In[11]:
+
+
 LINEWIDTH=10
 BLOCKWIDTH=90
 REFPOS=(10,10)
@@ -382,7 +384,11 @@ class Nmatrix:
         for ival in range(4):
             for jval in range(4):
                 self.matrix[ival][jval].draw(canvas,(pos[0]+jval*(BLOCKWIDTH+10),pos[1]+ival*(BLOCKWIDTH+10))) 
-        
+
+
+# In[12]:
+
+
 class sBlock:
     """
     2048 block element    
@@ -395,7 +401,6 @@ class sBlock:
     def getval(self):
         return self._value
     def __str__(self):
-        #output=str(self._value)
         return str(self._value)
     def draw(self,canvas,pos):
         if self._value == 0:
@@ -412,7 +417,12 @@ class sBlock:
                 canvas.draw_text(str(self._value), (pos[0]+15,pos[1]+20), 40, 'white')     
             elif self._value<3000:
                 canvas.draw_line( pos,(pos[0]+BLOCKWIDTH+10,pos[1]), BLOCKWIDTH, 'Blue')
-                canvas.draw_text(str(self._value), (pos[0]+5,pos[1]+20), 40, 'white')        
+                canvas.draw_text(str(self._value), (pos[0]+5,pos[1]+20), 40, 'white')
+
+
+# In[13]:
+
+
 def merge(line):
     """
     Function that merges a single row or column in 2048.
@@ -628,6 +638,7 @@ def keydown(key):
             if sum == 16:
                 judgedir[3]=1 
 
+
 # In[ ]:
 
 
@@ -640,12 +651,6 @@ if __name__ == "__main__":
     test_scene.add(menu)
     test_scene2.add(try_agin)
     cocos.director.director.run(test_scene)
-
-
-# In[2]:
-
-
-get_ipython().system('pip install SimpleGUICS2Pygame')
 
 
 # In[ ]:

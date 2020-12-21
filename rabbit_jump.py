@@ -206,7 +206,7 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.vbar.scale_x = k/10000
         self.floor.x -= 200*dt
         if k > 2000:
-            self.rabbit.jump((k-1000)/1000)
+            self.rabbit.jump((k-1000)/500)
         self.collide()
     
     def reset(self):

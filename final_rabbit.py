@@ -128,9 +128,9 @@ class Block(cocos.sprite.Sprite):
             self.position = 0, 0
             self.active = False
         else:
-            self.scale_x = 0.5 + random.random() * 2.5
+            self.scale_x = 0.5 + random.random() * 3
             self.scale_y = min(max(y - 50 + random.random() * 100, 100), 300) / 100
-            self.position = x + 200 + random.random() * 100, 0
+            self.position = x + 200 + random.random() * 70, 0
             self.active = True
             if self.x > 1000 and random.random() > 0.6:
                 self.floor.add(Carrot(self))

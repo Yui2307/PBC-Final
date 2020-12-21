@@ -61,9 +61,7 @@ class Rabbit(cocos.sprite.Sprite):
             self.y += 1
             self.speed -= max(min(h,6),8)
             self.is_able_jump = False
-        if not self.is_able_jump and self.y < 30:  #
-            self.y += 1 #
-            self.is_able_jump = False #
+
     
     def land(self, y):
         if self.dead:
@@ -135,7 +133,7 @@ class Block(cocos.sprite.Sprite):
             self.position = 0, 0
             self.active = False
         else:
-            self.scale_x = 1 + random.random() * 2.5
+            self.scale_x = 1 + random.random() * 2
             self.scale_y = min(max(y - 50 + random.random() * 100, 100), 300) / 100
             self.position = x + 180 + random.random() * 100, 0
             self.active = True
@@ -261,7 +259,7 @@ class Carrot(cocos.sprite.Sprite):
         self.game = block.game
         self.rabbit = block.game.rabbit
         self.floor = block.floor
-        self.position = block.x + block.width / 2, block.height + 100
+        self.position = block.x + block.width / 2, block.height + 200
 
         self.schedule(self.update)
 
@@ -287,6 +285,7 @@ class Gameover(cocos.layer.ColorLayer):
         font = ['SimHei', 'STHeiti', 'SimHei', 'SimSun']
         self.score = cocos.text.Label(u'Your Score：%d' % self.game.score,
                                       font_name=font,
+                                      bold = True,
                                       font_size=36)
         self.score.position = 170, 340
         self.add(self.score)

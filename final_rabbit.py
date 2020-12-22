@@ -91,7 +91,9 @@ class Rabbit(cocos.sprite.Sprite):
         self.rush_time = 0 
         self.position = 80, 280
 
-
+    def rush(self):
+        self.velocity = 400
+        self.rush_time = 3
 # In[4]:
 
 
@@ -207,6 +209,7 @@ class RabbitJump(cocos.layer.ColorLayer):
         self.floor.x -= 200*dt
         if k > 2000:
             self.rabbit.jump((k-1000)/1000)
+        self.floor.x -= self.rabbit.velocity * dt  #
         self.collide()
     
     def reset(self):
